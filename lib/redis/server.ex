@@ -34,6 +34,12 @@ defmodule Redis.Server do
     { :reply, res, client }
   end
 
+  def handle_call({:raw, command, params}, _from, client) do
+    cmdstring = String.upcase(to_string(command))
+    res = client |> query([cmdstring] ++ params)
+    { :reply, res, client }
+  end
+
   def handle_call({command}, _from, client) do
     cmdstring = String.upcase(to_string(command))
     res = client |> query([cmdstring])
