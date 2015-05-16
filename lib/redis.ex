@@ -899,7 +899,7 @@ defmodule Redis do
 
   @spec int_reply(binary) :: integer
   defp int_reply(reply) do
-    reply |> binary_to_integer
+    reply |> String.to_integer
   end
 
   @spec sts_reply(binary) :: :ok | binary
