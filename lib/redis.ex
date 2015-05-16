@@ -862,7 +862,7 @@ defmodule Redis do
   end
 
   for {fun, args, reply} <- funs do
-    args = Enum.map(args, &(quote(do: var!(unquote(&1)))))
+    args = Enum.map(args, &(quote(do: unquote(&1))))
     spec_args = [quote(do: var!(pid)) | args] |> Enum.map(&Macro.expand(&1, __ENV__)) 
     fun_args = [quote(do: var!(pid)\\nil) | args]
     msg = [fun | args]
