@@ -64,12 +64,6 @@ defmodule Redis.Server do
     { :reply, res, client }
   end
 
-  def handle_call({command, key, range_start, range_end}, _from, client) do
-    cmdstring = String.upcase(to_string(command))
-    res = client |> query([cmdstring, key, range_start, range_end])
-    { :reply, res, client }
-  end
-
   def handle_cast({:stop}, client) do
     {:stop, :normal, client}
   end
